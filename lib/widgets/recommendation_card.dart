@@ -1,5 +1,6 @@
 import 'package:ball_park/main.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class RecommendationCard extends StatelessWidget {
   final String title;
@@ -31,46 +32,89 @@ class RecommendationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.transparent, // Optional to keep the background color
-        borderRadius: BorderRadius.circular(16), // Match card's radius
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: Colors.grey.shade700, // Slight grey border color
-          width: 1, // Border thickness
+          color: Colors.grey.shade700,
+          width: 1,
         ),
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(16), // Match the container's radius
+        borderRadius: BorderRadius.circular(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Top Image Section
             Stack(
               children: [
-                // Background Image
                 Image.asset(
                   imagePath,
                   height: 150,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
-                // Weekday Overlay
                 Positioned(
+                  width: 80,
                   top: 8,
                   left: 8,
                   child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                     decoration: BoxDecoration(
-                      color: backgroundColor,
-                      borderRadius: BorderRadius.circular(4),
+                      color: Colors.black.withOpacity(0.6),
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Text(
-                      weekday,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,
-                      ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: 100,
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 6, horizontal: 8),
+                          decoration: BoxDecoration(
+                            color: backgroundColor,
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(8),
+                              topRight: Radius.circular(
+                                8,
+                              ),
+                            ),
+                          ),
+                          child: Text(
+                            weekday,
+                            style: GoogleFonts.lato(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        // Date
+                        Text(
+                          "$date $month",
+                          style: TextStyle(
+                            color: backgroundColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        // Horizontal Line
+                        Container(
+                          width: 100,
+                          height: 1.5,
+                          color: backgroundColor,
+                        ),
+                        const SizedBox(height: 6),
+                        // Time
+                        Text(
+                          time,
+                          style: GoogleFonts.lato(
+                              fontSize: 16, color: backgroundColor),
+                        ),
+                        const SizedBox(
+                          height: 6,
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -95,7 +139,7 @@ class RecommendationCard extends StatelessWidget {
             ),
             // Bottom Details Section
             Container(
-              color: customBlack, // Match the card's background color
+              color: customBlack,
               padding: const EdgeInsets.all(12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,47 +177,28 @@ class RecommendationCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Date and Time
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '$date $month',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                            ),
-                          ),
-                          Text(
-                            time,
-                            style: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
                       // Participants
                       Row(
                         children: [
                           ...List.generate(3, (index) {
-                            return Container(
-                              margin: const EdgeInsets.only(left: 4),
+                            return Transform.translate(
+                              offset: Offset(
+                                  -8.0 * index, 0), // Dynamic translation
                               child: CircleAvatar(
                                 radius: 12,
-                                backgroundImage: AssetImage(
-                                  'assets/images/avatar${index + 1}.png',
+                                backgroundImage: NetworkImage(
+                                  'https://picsum.photos/200/300?random=$index', // Different image for each index
                                 ),
                               ),
                             );
                           }),
-                          Container(
-                            margin: const EdgeInsets.only(left: 4),
-                            child: const CircleAvatar(
+                          Transform.translate(
+                            offset: const Offset(-24,
+                                0), // Further offset for the '+7' CircleAvatar
+                            child: CircleAvatar(
                               radius: 12,
                               backgroundColor: Colors.grey,
-                              child: Text(
+                              child: const Text(
                                 '+7',
                                 style: TextStyle(
                                   color: Colors.white,
@@ -184,14 +209,8 @@ class RecommendationCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  // Details Button and Options
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ElevatedButton(
+                      // Details Button
+                      ElevatedButton.icon(
                         onPressed: () {
                           // Handle details button
                         },
@@ -200,26 +219,16 @@ class RecommendationCard extends StatelessWidget {
                           foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
-                            side: const BorderSide(color: Colors.white),
                           ),
                         ),
-                        child: const Text('Details'),
-                      ),
-                      PopupMenuButton<String>(
-                        itemBuilder: (context) => [
-                          const PopupMenuItem(
-                            value: 'hide',
-                            child: Text('Hide'),
-                          ),
-                          const PopupMenuItem(
-                            value: 'report',
-                            child: Text('Report'),
-                          ),
-                        ],
-                        icon: const Icon(Icons.more_vert, color: Colors.white),
+                        icon: const Icon(Icons.more_vert, size: 16),
+                        label: const Text(
+                          'Details',
+                          style: TextStyle(fontSize: 12),
+                        ),
                       ),
                     ],
-                  ),
+                  )
                 ],
               ),
             ),

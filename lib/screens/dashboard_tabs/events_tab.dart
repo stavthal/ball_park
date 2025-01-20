@@ -224,7 +224,7 @@ class EventsTab extends StatelessWidget {
                 );
               },
               options: CarouselOptions(
-                height: 330,
+                height: 300,
                 viewportFraction: 1.0,
                 enableInfiniteScroll: false,
                 enlargeCenterPage: true,
