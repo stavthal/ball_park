@@ -32,7 +32,7 @@ class LandingThirdScreen extends StatelessWidget {
           ),
           const Spacer(),
           TextButton.icon(
-            onPressed: () => context.push('landing_three'),
+            onPressed: () => context.go('/'),
             icon: const Icon(
               Icons.chevron_right,
               color: Colors.amber,

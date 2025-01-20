@@ -1,6 +1,7 @@
 import 'package:ball_park/screens/landing/landing_second_screen.dart';
 import 'package:ball_park/screens/landing/landing_third_screen.dart';
 import 'package:go_router/go_router.dart';
+import '../screens/dashboard_screen.dart';
 import '../screens/landing/landing_first_screen.dart';
 
 class AppRouter {
@@ -19,6 +20,7 @@ class AppRouter {
         path: '/landing_three',
         builder: (context, state) => const LandingThirdScreen(),
       ),
+      GoRoute(path: '/', builder: (context, state) => const DashboardScreen())
     ],
   );
 }
