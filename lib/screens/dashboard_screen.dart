@@ -95,33 +95,116 @@ class _DashboardScreenState extends State<DashboardScreen>
         ),
       ),
       drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.amber,
-              ),
-              child: Text(
-                'Menu',
-                style: TextStyle(color: Colors.white, fontSize: 24),
-              ),
+        child: Container(
+          color: customBlack, // Set the background color of the drawer
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  color: customBlack,
+                  child: SafeArea(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          decoration: const BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Colors.grey,
+                                width: 2.0,
+                              ),
+                            ),
+                          ),
+                          child: ElevatedButton.icon(
+                            onPressed: () {
+                              // Handle login/signup
+                            },
+                            icon: const Icon(Icons.person),
+                            label: const Text(
+                              'Log in / Sign up',
+                              style: TextStyle(
+                                color: customBlack,
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.amber,
+                              textStyle: const TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    color:
+                        customBlack, // Set the background color of the drawer
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ListView(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          children: [
+                            _buildDrawerItem(
+                              icon: Icons.qr_code_scanner,
+                              title: 'Scan',
+                              onTap: () {
+                                // Handle Scan
+                              },
+                            ),
+                            _buildDrawerItem(
+                              icon: Icons.card_giftcard,
+                              title: 'Promo',
+                              onTap: () {
+                                // Handle Promo
+                              },
+                            ),
+                            _buildDrawerItem(
+                              icon: Icons.history,
+                              title: 'History',
+                              onTap: () {
+                                // Handle History
+                              },
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            const Divider(color: Colors.white), // Divider color
+                            _buildDrawerItem(
+                              icon: Icons.info,
+                              title: 'Terms and conditions',
+                              onTap: () {
+                                // Handle Terms and conditions
+                              },
+                            ),
+                            _buildDrawerItem(
+                              icon: Icons.info,
+                              title: 'About',
+                              onTap: () {
+                                // Handle About
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-            ListTile(
-              leading: const Icon(Icons.settings),
-              title: const Text('Settings'),
-              onTap: () {
-                // Handle navigation
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.logout),
-              title: const Text('Logout'),
-              onTap: () {
-                // Handle logout
-              },
-            ),
-          ],
+          ),
         ),
       ),
       body: TabBarView(
@@ -149,6 +232,27 @@ class _DashboardScreenState extends State<DashboardScreen>
             size: 30,
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildDrawerItem({
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    return ListTile(
+      leading: Icon(icon, color: Colors.white70),
+      title: Text(
+        title,
+        style: GoogleFonts.lato(
+            fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white70),
+      ),
+      onTap: onTap,
+      dense: true,
+      tileColor: const Color.fromARGB(255, 240, 240, 240),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.0),
       ),
     );
   }
