@@ -87,6 +87,9 @@ class _DashboardScreenState extends State<DashboardScreen>
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: Colors.amber,
+          labelColor: Colors.amber,
+          unselectedLabelColor: Colors.grey.shade400,
+          dividerColor: Colors.grey.shade800,
           tabs: const [
             Tab(icon: Icon(Icons.event), text: "Events"),
             Tab(icon: Icon(Icons.group), text: "Groups"),
