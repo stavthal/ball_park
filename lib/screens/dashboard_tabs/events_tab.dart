@@ -1,4 +1,6 @@
+import 'package:ball_park/main.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/event_card.dart';
@@ -76,8 +78,9 @@ class EventsTab extends StatelessWidget {
       },
     ];
 
-    return SingleChildScrollView(
-      child: Padding(
+    return Scaffold(
+      backgroundColor: customBlack,
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -231,6 +234,24 @@ class EventsTab extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+      floatingActionButton: SizedBox(
+        width: 50,
+        height: 50,
+        child: FloatingActionButton(
+          onPressed: () {
+            if (kDebugMode) {
+              print("Floating Action Button Pressed");
+            }
+          },
+          shape: const CircleBorder(),
+          backgroundColor: Colors.amber,
+          child: const Icon(
+            Icons.add,
+            color: customBlack,
+            size: 30,
+          ),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:ball_park/main.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class GroupsTab extends StatelessWidget {
@@ -82,6 +83,24 @@ class GroupsTab extends StatelessWidget {
             _buildContactItem('Alex', 'Done 👍', '12m ago'),
             _buildContactItem('Alex', 'Done 👍', '12m ago'),
           ],
+        ),
+      ),
+      floatingActionButton: SizedBox(
+        width: 50,
+        height: 50,
+        child: FloatingActionButton(
+          onPressed: () {
+            if (kDebugMode) {
+              print("Floating Action Button Pressed");
+            }
+          },
+          shape: const CircleBorder(),
+          backgroundColor: Colors.amber,
+          child: const Icon(
+            Icons.add,
+            color: customBlack,
+            size: 30,
+          ),
         ),
       ),
     );

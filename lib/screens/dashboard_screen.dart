@@ -218,24 +218,6 @@ class _DashboardScreenState extends State<DashboardScreen>
           FacilitiesTab(),
         ],
       ),
-      floatingActionButton: SizedBox(
-        width: 50,
-        height: 50,
-        child: FloatingActionButton(
-          onPressed: () {
-            if (kDebugMode) {
-              print("Floating Action Button Pressed");
-            }
-          },
-          shape: const CircleBorder(),
-          backgroundColor: Colors.amber,
-          child: const Icon(
-            Icons.add,
-            color: customBlack,
-            size: 30,
-          ),
-        ),
-      ),
     );
   }
 
